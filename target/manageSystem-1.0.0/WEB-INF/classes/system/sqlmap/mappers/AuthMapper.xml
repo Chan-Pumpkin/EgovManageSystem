@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="manage.auth.mapper.AuthMapper">
+	
+	<!-- 권한명 가져오기 위해 수정
+	<select id="selectUserByEmail" resultType="userVO">
+		SELECT
+			u.email																				AS email,
+			u.password																			AS password,
+			u.name																				AS name,
+			u.dept																				AS dept,
+			(select detail_code_name_ko from tb_detail_code where detail_code = u.dept)			AS deptName,
+			u.position																			AS position,
+			u_a.authority_id																	AS authorityId,
+			(SELECT authority_name from tb_authority where authority_id = u_a.authority_id) 	AS authorityName
+		FROM tb_user u
+		LEFT JOIN tb_user_authority u_a ON u.email = u_a.email
+		WHERE u.email = #{email}
+	</select>
+	-->
+	<select id="selectUserByEmail" resultType="userVO">
+		SELECT
+			u.email																				AS email,
+			u.password																			AS password
+		FROM tb_user u
+		WHERE u.email = #{email}
+	</select>
+</mapper>
