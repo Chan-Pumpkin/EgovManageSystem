@@ -29,7 +29,7 @@
 <body>
 	<div class="board-container">
 		<div class="col-sm-6">
-			<form action="<c:url value="/board/register.do"/>" method="POST">
+			<form action="<c:url value="/board/register.do"/>" method="POST" id="registrationForm" name="registrationForm">
 				<input type="hidden" id="id" name="id" value="${board.id}">
 				<div class="mb-3">
 
@@ -41,10 +41,32 @@
 
 				</div>
 				<div class="d-grid">
-					<button type="submit" class="btn btn-primary">등록</button>
+					<!-- <button type="submit" class="btn btn-primary">등록</button> -->
+					<button type="submit" onclick="fncInsertRegister()" class="btn btn-primary">등록</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+	/* 등록  */
+	function fncInsertRegister(){
+		let formdata = $("#registrationForm").serialize();
+		console.log(formdata);
+		
+		$.ajax({
+			url: '<c:url value="/board/register.do"/>',
+			method: "post",
+			data : formdata,
+			success : function(response){
+				if(response.result == 'success'){
+					alert("등록되었습니다.");
+					fncList();
+				}else{
+					alert(response.result);
+				}
+			},
+		});
+	}
+	</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import egovframework.rte.fdl.cryptography.EgovPasswordEncoder;
 import manage.auth.mapper.AuthMapper;
 import manage.auth.service.AuthService;
 import manage.auth.service.UserVO;
@@ -19,6 +20,9 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
 	private AuthMapper authMapper;
+	
+	@Autowired
+	private EgovPasswordEncoder egovPasswordEncoder;
 	
 	/**
 	 * 로그인
@@ -48,4 +52,10 @@ public class AuthServiceImpl implements AuthService {
 		
 		return resultMap;
 	}
+	/*
+	public void insertEmail(UserVO userVO) {
+		userVO.setPassword(egovPasswordEncoder.encryptPassword(userVO.getPassword()));
+		authMapper.insertEmail(userVO);
+	}
+	*/
 }

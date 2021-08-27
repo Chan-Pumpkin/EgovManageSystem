@@ -12,21 +12,9 @@
 	  	<put-attribute name="tiles_script"		value="/WEB-INF/tiles/common/script.jsp" />
 	  	<put-attribute name="tiles_sidebar"		value="/WEB-INF/tiles/common/sidebar.jsp" />
 	</definition>
-	<definition name="layouts-tiles" template="/WEB-INF/tiles/tiles-layout-login.jsp">
-	  	<put-attribute name="tiles_content"		value="" />
-	  	<put-attribute name="tiles_footer"		value="/WEB-INF/tiles/common/footer.jsp" />
-	  	<put-attribute name="tiles_head"		value="/WEB-INF/tiles/common/head.jsp" />
-	  	<put-attribute name="tiles_navbar"		value="/WEB-INF/tiles/common/navbar.jsp" />
-	  	<put-attribute name="tiles_script"		value="/WEB-INF/tiles/common/script.jsp" />
-	  	<put-attribute name="tiles_sidebar"		value="/WEB-INF/tiles/common/sidebar.jsp" />
-	</definition>
-	
+		
 	<definition name="*/*/*.tiles" extends="layouts-tiles">
 	  	<put-attribute name="tiles_content"   value="/WEB-INF/jsp/{1}/{2}/{3}.jsp" />
-	</definition>
-	
-	<definition name="*/*.tiles" extends="layouts-tiles">
-	  	<put-attribute name="tiles_content"   value="/WEB-INF/jsp/{1}/{2}.jsp" />
 	</definition>
 	
 </tiles-definitions>

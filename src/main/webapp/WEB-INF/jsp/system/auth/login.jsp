@@ -3,40 +3,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui"	 uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<c:import url="/WEB-INF/tiles/common/head.jsp"/>
+<c:import url="/WEB-INF/tiles/common/head.jsp"/>
+<meta charset="utf-8">
+<title>로그인</title>
 </head>
-<body class="bg-primary">
-	<div id="layoutAuthentication">
-		<div id="layoutAuthentication_content">
-			<main>
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-lg-5">
-							<div class="card shadow-lg border-0 rounded-lg mt-5">
-								<div class="card-header">
-									<h3 class="text-center font-weight-light my-4">Login</h3>
-								</div>
-								<div class="card-body">
-									<div class="form-floating mb-3">
-										<input class="form-control" id="email" type="email" placeholder="name@example.com" /> <label for="inputEmail">Email address</label>
+
+<body class="bg-gradient-primary">
+	<div class="container">
+		<!-- Outer Row -->
+		<div class="row justify-content-center">
+			<div class="col-xl-10 col-lg-12 col-md-9">
+				<div class="card o-hidden border-0 shadow-lg my-5">
+					<div class="card-body p-0">
+						<!-- Nested Row within Card Body -->
+						<div class="row">
+							<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+							<div class="col-lg-6">
+								<div class="p-5">
+									<div class="text-center">
+										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
 									</div>
-									<div class="form-floating mb-3">
-										<input class="form-control" id="password" type="password" autocomplete="off" placeholder="password" /> <label for="inputPassword">Password</label>
+									<!-- <form class="user"> -->
+										<div class="form-group">
+											<input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="name@example.com">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control form-control-user" name="password" id="password" autocomplete="off" placeholder="Password">
+										</div>
+										<div class="form-group">
+											<div class="custom-control custom-checkbox small">
+												<input type="checkbox" class="custom-control-input"id="customCheck"> 
+												<label class="custom-control-label" for="customCheck">Remember Me</label>
+											</div>
+										</div>
+										<button class="btn btn-primary btn-user btn-block" type="button" onclick="fncLogin()"> Login </button>
+									<!-- </form> -->
+									<div class="text-center">
+										<br>
+										<a class="small" href="/auth/register.do">Forgot Password?</a>
 									</div>
-									<div class="form-check mb-3">
-										<input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" /> <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-									</div>
-									<div class="d-flex align-items-center justify-content-end mt-4 mb-0">
-										<button class="btn btn-primary" onclick="fncLogin()">Login</button>
+									<div class="text-center">
+										<br>
+										<a class="small" href="/manageSystem/auth/register.do">Create an Account!</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</main>
+			</div>
 		</div>
 	</div>
 	<c:import url="/WEB-INF/tiles/common/script.jsp"/>
@@ -51,14 +69,17 @@
 				url: '<c:url value="/auth/login.do"/>',
 				type: 'post',
 				data: data,
-				success: function(data) {
-					console.log(data);
-					if(data.result.type == 'success') {
+				success: function(response) {
+					console.log(response);
+					if(response.result.type == 'success') {
 						location.href = '<c:url value="/board/list.do"/>';
 					} else if(response.result.type == 'fail') {
 						alert(response.result.message);
 					}
-				}
+				},
+				error: function (xhr, status, error) {
+					alert("실패");
+					} 
 			});
 		}
 	</script>

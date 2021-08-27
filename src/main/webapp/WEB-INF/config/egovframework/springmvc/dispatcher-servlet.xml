@@ -36,6 +36,7 @@
     <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do" />
+			<mvc:exclude-mapping path="/auth/register.do"/>
 			<mvc:exclude-mapping path="/auth/login.do"/>
 			<bean class="egovframework.cmmn.interceptor.AuthenticationInterceptor" />
 		</mvc:interceptor>
@@ -71,6 +72,14 @@
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
 	
 	
+	<!-- /For Pagination Tag -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"></property>
+	</bean>
+		<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="modelKey" value="result"/>
+		<property name="contentType" value="application/json;charset=UTF-8"> </property>
+	</bean>
 	
 	<!-- tiles 설정 -->
 	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -89,8 +98,5 @@
 	<!--tiles 추가로 인한 p:order 변경( 1 -> 2 ) -->
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="2"
 		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
-	
-	
-	
 	
 </beans>
