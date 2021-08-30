@@ -27,7 +27,7 @@
 	</select>
 	
 	<insert id="insertEmail">
-		INSERT INTO tb_board(email, password)
-		VALUES (#{email}, #{password})
+		INSERT INTO tb_user(email, password, name)
+		VALUES (#{email}, #{password}, #{name})
 	</insert>
 </mapper>

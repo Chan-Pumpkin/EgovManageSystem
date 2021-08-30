@@ -25,38 +25,33 @@
 							<div class="text-center">
 								<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
 							</div>
-							<form class="user">
-								<div class="form-group row">
-									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
-									</div>
-									<div class="col-sm-6">
-										<input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
-									</div>
+							
+							<form id="userForm" name="userForm" method="POST" action="<c:url value="/auth/insert.do"/>">
+								<div class="form-group">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Name" value="${user.name}">
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="${user.email}">
 								</div>
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+										<input type="password" class="form-control" id="password" name="password" placeholder="Password" value="${user.password}">
 									</div>
+									<!-- 
 									<div class="col-sm-6">
 										<input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
 									</div>
+									 -->
 								</div>
-								<a href="login.html" class="btn btn-primary btn-user btn-block"> Register Account </a>
-								<hr>
-								<a href="index.html" class="btn btn-google btn-user btn-block"> <i class="fab fa-google fa-fw"></i> Register with Google </a> 
-								<a href="index.html" class="btn btn-facebook btn-user btn-block"> <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook </a>
 							</form>
-							<hr>
-							<div class="text-center">
-								<a class="small" href="forgot-password.html">Forgot Password?</a>
+							<div class="d-grid">
+							<button type="submit" onclick="fncInsertRegister()" class="btn btn-primary"> Register Account </button>
 							</div>
 							<div class="text-center">
-								<a class="small" href="login.html">Already have an account? Login!</a>
+								<br>
+								<a class="medium" href="login.do">Already have an account? Login!</a>
 							</div>
+							<br><br><br>
 						</div>
 					</div>
 				</div>
@@ -66,27 +61,28 @@
 	</div>
 	<c:import url="/WEB-INF/tiles/common/script.jsp"/>
 	<script>
-		function fncLogin() {
+		/* 등록  */
+		function fncInsertRegister(){
+			let data = $("#userForm").serialize(); 
+			/* 
 			let data = {
+				'name': $('#name').val(),
 				'email': $('#email').val(),
 				'password': $('#password').val()
 			};
-			
+			 */
 			$.ajax({
-				url: '<c:url value="/auth/login.do"/>',
-				type: 'post',
-				data: data,
-				success: function(response) {
-					console.log(response);
-					if(response.result.type == 'success') {
-						location.href = '<c:url value="/board/list.do"/>';
-					} else if(response.result.type == 'fail') {
-						alert(response.result.message);
+				url: '<c:url value="/auth/insert.do"/>',
+				method: "post",
+				data : data,
+				success : function(response){
+					if(response.result == 'success'){
+						alert("등록되었습니다.");
+						location.href = '<c:url value="/auth/login.do"/>';
+					}else{
+						alert(response.result);
 					}
 				},
-				error: function (xhr, status, error) {
-					alert("실패");
-					} 
 			});
 		}
 	</script>

@@ -9,5 +9,6 @@ public interface AuthService {
 	 * 사용자관리 등록
 	 * @param employerVO
 	 */
-	//public void insertEmail(UserVO userVO);
+	public void insertEmail(UserVO userVO); 
+	/* public String insertEmail(UserVO userVO); */
 }

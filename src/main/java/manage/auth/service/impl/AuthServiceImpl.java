@@ -37,8 +37,8 @@ public class AuthServiceImpl implements AuthService {
 			resultMap.put("message", "존재하지 않는 이메일 입니다.");
 		} else {
 			
-			if(user.getPassword().equals(userVO.getPassword())) {
-				//if(user.getPassword().equals(egovPasswordEncoder.encryptPassword(userVO.getPassword()))) {
+			/*if(user.getPassword().equals(userVO.getPassword())) {*/
+				if(user.getPassword().equals(egovPasswordEncoder.encryptPassword(userVO.getPassword()))) {
 				ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
 				HttpSession httpSession = servletRequestAttributes.getRequest().getSession();
 				httpSession.setAttribute("userVO", user);
@@ -52,10 +52,37 @@ public class AuthServiceImpl implements AuthService {
 		
 		return resultMap;
 	}
-	/*
+
 	public void insertEmail(UserVO userVO) {
 		userVO.setPassword(egovPasswordEncoder.encryptPassword(userVO.getPassword()));
 		authMapper.insertEmail(userVO);
 	}
+
+	/*
+	public String insertEmail(UserVO userVO) {
+		
+		String returnMsg = "";
+		
+		if(userVO.getEmail() != null) {
+			userVO.setPassword(egovPasswordEncoder.encryptPassword(userVO.getPassword()));
+			authMapper.insertEmail(userVO);
+			
+			return returnMsg = "success";
+		}
+		
+		return returnMsg = "fail";
+	}
 	*/
+	/*
+	public void insertEmail(UserVO userVO) {
+		
+		if(userVO.getEmail() != null) {
+			userVO.setPassword(egovPasswordEncoder.encryptPassword(userVO.getPassword()));
+			authMapper.insertEmail(userVO);
+			
+		}
+		
+	}
+	*/
+	
 }

@@ -6,5 +6,5 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 @Mapper
 public interface AuthMapper {
 	public UserVO selectUserByEmail(String email);
-	public UserVO insertEmail(String email);
+	public void insertEmail(UserVO userVO);
 }

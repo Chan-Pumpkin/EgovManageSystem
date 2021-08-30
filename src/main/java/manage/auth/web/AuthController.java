@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import manage.auth.service.AuthService;
 import manage.auth.service.UserVO;
+import manage.system.board.service.BoardVO;
 
 @RequestMapping("/auth")
 @Controller
@@ -50,19 +51,52 @@ public class AuthController {
 	 * @param employerVO
 	 * @return
 	 */
+	
+	/**
+	 * 샘플 등록/수정
+	 * @param boardVO
+	 * @return
+	 */
 	/*
-	@PostMapping("/register.do")
-	public String register(UserVO userVO, ModelMap model) {
-		setPage(employerSearchVO);
-		insertEmployer(employerVO);
-		paginationInfo.setTotalRecordCount(employerService.selectEmployerListTotalCount(employerSearchVO));
-
-		model.addAttribute("employerList", employerService.selectEmployerList(employerSearchVO));
-		model.addAttribute("paginationInfo", paginationInfo);
-		model.addAttribute("searchEmployerChoice", employerSearchVO.getSearchEmployerChoice());
-		model.addAttribute("searchEmployerKeyword", employerSearchVO.getSearchEmployerKeyword());
-
-		return "redirect:/system/employer/list.do";
+	@PostMapping("/insert.do")
+	public String register(UserVO userVO) {
+		AuthService.insertEmail(userVO);
+ 
+		return JSP_DIR + "login";
 	}
 	*/
+	/*
+	@PostMapping("/insert.do")
+	public String register(UserVO userVO) {
+		AuthService.insertEmail(userVO);
+ 
+		return "redirect:/";
+	}
+	*/
+	/*
+	@PostMapping("/insert.do")
+	public ModelAndView insert(UserVO userVO, ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		AuthService.insertEmail(userVO);
+		
+		modelAndView.setViewName("jsonView");
+		modelAndView.addObject("result", "success");
+		
+		return modelAndView;
+	}
+*/
+	
+	@PostMapping("/insert.do")
+	public ModelAndView insert(UserVO userVO, ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		AuthService.insertEmail(userVO);
+		
+		modelAndView.setViewName("jsonView");
+		modelAndView.addObject("result", "success");
+		
+		return modelAndView;
+	}
+	
 }

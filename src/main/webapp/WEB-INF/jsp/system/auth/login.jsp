@@ -42,13 +42,10 @@
 										<button class="btn btn-primary btn-user btn-block" type="button" onclick="fncLogin()"> Login </button>
 									<!-- </form> -->
 									<div class="text-center">
-										<br>
-										<a class="small" href="/auth/register.do">Forgot Password?</a>
+										<br><br>
+										<a class="medium" href="/manageSystem/auth/register.do">Create an Account!</a>
 									</div>
-									<div class="text-center">
-										<br>
-										<a class="small" href="/manageSystem/auth/register.do">Create an Account!</a>
-									</div>
+									<br><br><br>
 								</div>
 							</div>
 						</div>
@@ -59,6 +56,7 @@
 	</div>
 	<c:import url="/WEB-INF/tiles/common/script.jsp"/>
 	<script>
+	
 		function fncLogin() {
 			let data = {
 				'email': $('#email').val(),
